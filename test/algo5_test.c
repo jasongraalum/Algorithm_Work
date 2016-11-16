@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
    printDataMatrix(matrix2);
    printf("\n");
 
-   product = matrixMultiply(matrix1, matrix2, m, n, p);
+   product = matrixMultiply(matrix1, matrix2);
    printf("Multiplication of:\n");
    printDataMatrix(matrix1);
    printf("\n");

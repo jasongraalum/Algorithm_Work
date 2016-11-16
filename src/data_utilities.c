@@ -1,14 +1,34 @@
 #include "algo1.h"
 
+static int randReady=0;
 void initRandGen()
 {
-   static int ready=0;
 
-   if(!ready)
+   if(!randReady)
       srand(time(NULL));
 
-   ready = 1;
+   randReady = 1;
 }
+
+int getRandomInt(int l, int u)
+{
+   if(!randReady)
+      initRandGen();
+
+   return(l + (rand() % (u - l)));
+}
+
+int getRandomChar()
+{
+   int l = 31;
+   int u = 126;
+
+   if(!randReady)
+      initRandGen();
+
+   return(l + (rand() % (u - l)));
+}
+
 
 void writeDataArray(struct dataArray *array, char *ofn)
 {

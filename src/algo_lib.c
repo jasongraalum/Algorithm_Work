@@ -48,7 +48,6 @@ int findDuplicates(struct dataArray *data)
 
 int dotProduct(struct dataArray *vector1, struct dataArray *vector2)
 {
-   int index = 0;
    int dp=0;
    if(vector1->size != vector2->size)
       return(-1);
@@ -65,13 +64,75 @@ int dotProduct(struct dataArray *vector1, struct dataArray *vector2)
 // n* : matrix rows
 //
 // n1 must equal m2
-struct dataArray* matrixMultiply(struct dataArray *A, struct dataArray *B, int m, int n, int p)
+struct dataArray* matrixBinaryMultiply(struct dataArray *A, struct dataArray *B)
 {
    struct dataArray *prodArray;
    int A_row, B_col, prod_index;
+   int m, n, p;
+   int sum;
+
+   if(A->row != B->col)
+   {
+      printf("Matricies are not compatible:(%d x %d) and (%d x %d)\n", A->row, A->col, B->row, B->row);
+      return(NULL);
+   }
+
+   m = A->row;
+   n = A->col;
+   p = B->row;
 
    prodArray = malloc(sizeof(struct dataArray));
    prodArray->payload = malloc(sizeof(int)*n*p);
+   prodArray->size = n*p;
+   prodArray->row = n;
+   prodArray->col = p;
+
+   prod_index = 0;
+   for(int i = 0; i < n; i++)
+   {
+      A_row = i;
+      for(int j = 0; j < p; j++)
+      {
+         B_col = j;
+         prod_index = A_row*p + B_col;
+         sum = 0;
+         prodArray->payload[prod_index] = 0;
+         for(int k = 0; k < m; k++)
+            sum = sum + A->payload[A_row*m+k]*B->payload[B_col+k*p];
+         prodArray->payload[prod_index] = (sum > 0) ? 1 : 0;
+      }
+
+   }
+
+   return(prodArray);
+
+}
+// Args : Two arrays of ints of m1*n1 and m2*n2 size
+// m* : matrix columns
+// n* : matrix rows
+//
+// n1 must equal m2
+struct dataArray* matrixMultiply(struct dataArray *A, struct dataArray *B)
+{
+   struct dataArray *prodArray;
+   int A_row, B_col, prod_index;
+   int m, n, p;
+
+   if(A->row != B->col)
+   {
+      printf("Matricies are not compatible:(%d x %d) and (%d x %d)\n", A->row, A->col, B->row, B->row);
+      return(NULL);
+   }
+
+   m = A->row;
+   n = A->col;
+   p = B->row;
+
+   prodArray = malloc(sizeof(struct dataArray));
+   prodArray->payload = malloc(sizeof(int)*n*p);
+   prodArray->size = n*p;
+   prodArray->row = n;
+   prodArray->col = p;
 
    prod_index = 0;
    for(int i = 0; i < n; i++)

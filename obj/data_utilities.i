@@ -2430,27 +2430,49 @@ struct dataArray *readMatrix(char*);
 
 
 
-struct element *findLargest(struct dataArray*);
+int findLargest(struct dataArray*);
 int findValue(struct dataArray*,int);
 int findDuplicates(struct dataArray*);
 int dotProduct(struct dataArray*, struct dataArray*);
-struct dataArray* matrixMultiply(struct dataArray*, struct dataArray*, int, int, int);
+struct dataArray* matrixMultiply(struct dataArray*, struct dataArray*);
+struct dataArray* matrixBinaryMultiply(struct dataArray*, struct dataArray*);
 int binaryDigits(unsigned int);
 # 2 "/media/NB_Fall_2016/Theory/Algorithms/src/data_utilities.c" 2
 
+static int randReady=0;
 void initRandGen()
 {
-   static int ready=0;
 
-   if(!ready)
+   if(!randReady)
       srand(time(
 # 8 "/media/NB_Fall_2016/Theory/Algorithms/src/data_utilities.c" 3 4
                 ((void *)0)
 # 8 "/media/NB_Fall_2016/Theory/Algorithms/src/data_utilities.c"
                     ));
 
-   ready = 1;
+   randReady = 1;
 }
+
+int getRandonInt(int l, int u)
+{
+   char c;
+   if(!randReady)
+      initRandGen();
+
+   return(l + (rand() % (u - l)));
+}
+
+int getRandonChar()
+{
+   int l = 31;
+   int u = 126;
+
+   if(!randReady)
+      initRandGen();
+
+   return(l + (rand() % (u - l)));
+}
+
 
 void writeDataArray(struct dataArray *array, char *ofn)
 {
@@ -2478,7 +2500,7 @@ struct dataArray *readMatrix(char *ifn)
    int col_index = 0;
    while(!feof(ifp) && (row_index < row) && (col_index < col))
    {
-      printf("Reading into (%d, %d)[%d]\n", row_index, col_index, row_index*row + col_index);
+
       fscanf(ifp,"%d",&(matrix->payload[row_index*row + col_index]));
       col_index = (col_index + 1) % col;
       if(col_index == 0)

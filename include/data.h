@@ -25,3 +25,13 @@
 #define K_STRING 3
 
 #define DATA_SIZE 64
+
+#ifndef DATA_STRUCT_DEF
+   #include "data.h"
+   #define KEY_TYPE K_INT
+   #define PAYLOAD_TYPE P_INT
+   #define STRUCT_TYPE S_ARRAY
+   #include "data_struct.h"
+   #define DATA_STRUCT_DEF
+#endif
+

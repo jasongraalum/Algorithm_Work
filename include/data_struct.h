@@ -52,9 +52,3 @@ typedef struct dataArray
    unsigned int row, col;
 } dataArray;
 
-void initRandGen();
-void printDataArray(struct dataArray*);
-struct dataArray *genRandomArray(int, int);
-int printDataMatrix(struct dataArray*);
-struct dataArray *readMatrix(char*);
-
