@@ -1,0 +1,1 @@
+char *readLineFromFile(FILE *, int);

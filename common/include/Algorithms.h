@@ -1,0 +1,2 @@
+#define MAX_FILENAME_LEN 256
+#define MAX_STRING_LEN 256

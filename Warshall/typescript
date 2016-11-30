@@ -1,0 +1,130 @@
+Script started on Wed 23 Nov 2016 08:57:31 AM PST
+]0;jason@MAC_Ubuntu: ~/NB_Fall_2016/Theory/PA_work/PA5jason@MAC_Ubuntu:~/NB_Fall_2016/Theory/PA_work/PA5$ make -B
+mkdir -p obj
+cd /media/NB_Fall_2016/Theory/PA_work/PA5/common; make -B all; cp ./obj/*.o /media/NB_Fall_2016/Theory/PA_work/PA5/obj; cd /media/NB_Fall_2016/Theory/PA_work/PA5
+make[1]: Entering directory '/media/NB_Fall_2016/Theory/PA_work/PA5/common'
+cd ./src; make -B all;  cd /media/NB_Fall_2016/Theory/PA_work/PA5/common
+make[2]: Entering directory '/media/NB_Fall_2016/Theory/PA_work/PA5/common/src'
+gcc -g -Wall  -I../inc/  -c dataStructs.c; mv *.o ../obj
+gcc -g -Wall  -I../inc/  -c heapSort.c; mv *.o ../obj
+gcc -g -Wall  -I../inc/  -c directedGraph.c; mv *.o ../obj
+gcc -g -Wall  -I../inc/  -c utils.c; mv *.o ../obj
+make[2]: Leaving directory '/media/NB_Fall_2016/Theory/PA_work/PA5/common/src'
+make[1]: Leaving directory '/media/NB_Fall_2016/Theory/PA_work/PA5/common'
+cd /media/NB_Fall_2016/Theory/PA_work/PA5/src; make -B all; cd /media/NB_Fall_2016/Theory/PA_work/PA5; gcc -I -I/media/NB_Fall_2016/Theory/PA_work/PA5/common -g -Wall -B /media/NB_Fall_2016/Theory/PA_work/PA5/src -B /media/NB_Fall_2016/Theory/PA_work/PA5/obj -o ./bin/dijktstra /media/NB_Fall_2016/Theory/PA_work/PA5/obj/main.o /media/NB_Fall_2016/Theory/PA_work/PA5/obj/dijkstra_sssp.o  /media/NB_Fall_2016/Theory/PA_work/PA5/obj/heapSort.o /media/NB_Fall_2016/Theory/PA_work/PA5/obj/directedGraph.o /media/NB_Fall_2016/Theory/PA_work/PA5/obj/dataStructs.o /media/NB_Fall_2016/Theory/PA_work/PA5/obj/utils.o
+make[1]: Entering directory '/media/NB_Fall_2016/Theory/PA_work/PA5/src'
+gcc -g -Wall  -I../inc/ -I../common/inc -c main.c; mv *.o ../obj
+gcc -g -Wall  -I../inc/ -I../common/inc -c dijkstra_sssp.c; mv *.o ../obj
+make[1]: Leaving directory '/media/NB_Fall_2016/Theory/PA_work/PA5/src'
+]0;jason@MAC_Ubuntu: ~/NB_Fall_2016/Theory/PA_work/PA5jason@MAC_Ubuntu:~/NB_Fall_2016/Theory/PA_work/PA5$ make test4
+./bin/dijktstra ./testcases/graph4.txt
+Reading data from ./testcases/graph4.txt
+Graph 4 for Dijkstra Test
+###################
+Graph name: Graph 4 for Dijkstra Test
+Vertex Count: 6
+Edge Count: 8
+Starting Vertex: 1
+Edge List:
+	(1,2,4)
+	(1,5,8)
+	(2,3,5)
+	(2,4,7)
+	(3,4,2)
+	(3,6,1)
+	(4,5,2)
+	(5,6,3)
+###################
+Parent Vertex 1-> Children: 2 5 
+Parent Vertex 2-> Children: 3 4 
+Parent Vertex 3-> Children: 4 6 
+Parent Vertex 4-> Children: 5 
+Parent Vertex 5-> Children: 6 
+Parent Vertex 6-> Children: 
+Adjacency Matrix
+        1   2   3   4   5   6
+     ------------------------
+   1|   0   4   0   0   8   0
+   2|   0   0   5   7   0   0
+   3|   0   0   0   2   0   1
+   4|   0   0   0   0   2   0
+   5|   0   0   0   0   0   3
+   6|   0   0   0   0   0   0
+Enter source node number(1 - 6):3
+Distances from node 3:
+=======================
+Node:1	Distance = INF	No Path to 1
+Node:2	Distance = INF	No Path to 2
+Node:4	Distance = 2	Path = 4<-3
+Node:5	Distance = 4	Path = 5<-4<-3
+Node:6	Distance = 1	Path = 6<-3
+]0;jason@MAC_Ubuntu: ~/NB_Fall_2016/Theory/PA_work/PA5jason@MAC_Ubuntu:~/NB_Fall_2016/Theory/PA_work/PA5$ make test5
+./bin/dijktstra ./testcases/graph5.txt
+Reading data from ./testcases/graph5.txt
+Graph 5 for Dijkstra Test
+###################
+Graph name: Graph 5 for Dijkstra Test
+Vertex Count: 11
+Edge Count: 17
+Starting Vertex: 1
+Edge List:
+	(1,2,4)
+	(1,8,2)
+	(1,4,9)
+	(2,3,2)
+	(4,2,20)
+	(4,7,9)
+	(4,5,7)
+	(5,1,4)
+	(5,10,3)
+	(7,3,2)
+	(8,9,1)
+	(9,8,10)
+	(9,5,8)
+	(10,4,5)
+	(11,7,3)
+	(11,5,4)
+	(11,10,8)
+###################
+Parent Vertex 1-> Children: 2 8 4 
+Parent Vertex 2-> Children: 3 
+Parent Vertex 3-> Children: 
+Parent Vertex 4-> Children: 2 7 5 
+Parent Vertex 5-> Children: 1 10 
+Parent Vertex 6-> Children: 
+Parent Vertex 7-> Children: 3 
+Parent Vertex 8-> Children: 9 
+Parent Vertex 9-> Children: 8 5 
+Parent Vertex 10-> Children: 4 
+Parent Vertex 11-> Children: 7 5 10 
+Adjacency Matrix
+        1   2   3   4   5   6   7   8   9  10  11
+     --------------------------------------------
+   1|   0   4   0   9   0   0   0   2   0   0   0
+   2|   0   0   2   0   0   0   0   0   0   0   0
+   3|   0   0   0   0   0   0   0   0   0   0   0
+   4|   0  20   0   0   7   0   9   0   0   0   0
+   5|   4   0   0   0   0   0   0   0   0   3   0
+   6|   0   0   0   0   0   0   0   0   0   0   0
+   7|   0   0   2   0   0   0   0   0   0   0   0
+   8|   0   0   0   0   0   0   0   0   1   0   0
+   9|   0   0   0   0   8   0   0  10   0   0   0
+  10|   0   0   0   5   0   0   0   0   0   0   0
+  11|   0   0   0   0   4   0   3   0   0   8   0
+Enter source node number(1 - 11):4
+Distances from node 4:
+=======================
+Node:1	Distance = 11	Path = 1<-5<-4
+Node:2	Distance = 15	Path = 2<-1<-5<-4
+Node:3	Distance = 11	Path = 3<-7<-4
+Node:5	Distance = 7	Path = 5<-4
+Node:6	Distance = INF	No Path to 6
+Node:7	Distance = 9	Path = 7<-4
+Node:8	Distance = 13	Path = 8<-1<-5<-4
+Node:9	Distance = 14	Path = 9<-8<-1<-5<-4
+Node:10	Distance = 10	Path = 10<-5<-4
+Node:11	Distance = INF	No Path to 11
+]0;jason@MAC_Ubuntu: ~/NB_Fall_2016/Theory/PA_work/PA5jason@MAC_Ubuntu:~/NB_Fall_2016/Theory/PA_work/PA5$ exit
+exit
+
+Script done on Wed 23 Nov 2016 08:57:55 AM PST

@@ -1,0 +1,10 @@
+Alphabet: 0 1 2 3
+States: 4 
+Start: 0
+Accept: 3 
+Transition Function:
+  0 1 2 3
+0 0 1 0 0
+1 0 1 2 0
+2 0 0 2 3
+3 0 0 0 3

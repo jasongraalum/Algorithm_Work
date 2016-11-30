@@ -1,0 +1,9 @@
+INCLUDE_OPTS = -I../inc/ 
+CC = gcc
+
+CFLAGS = -g -Wall -B $(SRC_DIR) -B $(OBJ_DIR)
+
+all: heapSort.o directedGraph.o utils.o dataStructs.o
+
+.c.o:
+	$(CC) $(CFLAGS) $(INCLUDE_OPTS) -c $<

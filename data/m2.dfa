@@ -1,0 +1,11 @@
+Name: m2
+Alphabet: 0 1
+States: 0 1 2 3
+Start: 0
+Accept: 0 3
+Transition_Table:
+  0 1 
+0 0 1
+1 2 3
+2 1 0
+3 2 3
