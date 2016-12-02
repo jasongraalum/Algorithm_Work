@@ -1,5 +1,5 @@
 /*
- *  dataStructs.c
+ *  BinarySearchTree.c
  *
  *  Jason Graalum
  *  November 15, 2016
@@ -7,101 +7,106 @@
  *
  *  Generic support for standard data structures used in a variety of programs
  *
- *  queue
- *  priority queue (min and max)
- *  stack
- *
- *  The same data element(queueNode) is used for all structures. The queueNode structure
- *  include a void ptr to another structure that can be defined within the main program
- *  to hold program specific payloads
+ *  BST
  *
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "Queue.h"
+#include "BinarySearchTree.h"
 
 //
-// Queue routines
+// BST routines
 //
-struct queueNode* dequeue(struct Queue *p)
+void printBST_DF(struct BST *bst)
 {
-   struct queueNode *node;
-   node = p->head;
-   p->head = p->head->next;
+   printBST_DF_Node(bst->top);
+}
+void printBST_DF_Node(struct BSTNode *top)
+{
+   if(top != NULL)
+   {
+      printBST_DF_Node(top->left_child);
+      printBST_DF_Node(top->left_child);
+      printf("%d\n", top->key); 
+   }
+}
+
+void printBST_BF(struct BST *bst)
+{
+   printBST_BF_Node(bst->top);
+}
+void printBST_BF_Node(struct BSTNode *top)
+{
+   if(top != NULL)
+   {
+      printf("%d\n", top->key); 
+      printBST_BF_Node(top->left_child);
+      printBST_BF_Node(top->left_child);
+   }
+}
+
+
+struct BST* joinBSTs(struct BST *bst1, struct BST *bst2)
+{
+
+   return(bst);
+}
+
+void addBSTNode(struct BST *bst, struct BSTNode *node)
+{
+   if(top == NULL)
+      top = node;
+   else
+      addBSTNode2(bst->top,node);
+}
+void addBSTNode2(struct BSTNode *top, struct BSTNode *node)
+{
+   if(node->key < top->key) // left side
+   {
+      if(top->left_child == NULL)
+         top->left_child = node;
+      else
+         addBSTNode2(top->left_child,node);
+   }
+   else // right side
+   {
+      if(top->right_child == NULL)
+         top->right_child = node;
+      else
+         addBSTNode2(top->right_child,node);
+   }
+}
+
+
+struct BSTNode* searchBST(struct BST *bst, int key);
+{
+   return(searchBST2(bst->top,key));
+}
+struct BSTNode* searchBST2(struct BSTnode *top, int key);
+{
+   if(top->key == key)
+      return(top);
+   else if(key < top->key)
+   {
+      if(top->left_child == NULL)
+         node = NULL;
+      else
+         node = searchBST2(top->left_child,key);
+   }
+   else
+   {
+      if(top->left_child == NULL)
+         node = NULL;
+      else
+         node = searchBST2(top->left_child,key);
+   }
+
    return(node);
 }
 
-void enqueue(struct Queue *q, struct queueNode *node)
+
+struct BSTNode* removeBSTNode(struct BST *bst, struct BSTNode *node);
 {
-   q->tail->next = node;
-   node->next = NULL;
-   q->tail = node;
+   return();
 }
-
-void enqueueMax(struct Queue *q, struct queueNode *node)
-{
-   struct queueNode *current;
-   current = q->head;
-
-   if(!current)
-   {
-      q->head = node;
-      return;
-   }
-   if(current->priority < node->priority)
-   {
-      node->next = current;
-      q->head = node;
-      return;
-   }
-   
-   while(current->next && (current->next->priority > node->priority))
-      current = current->next;
-
-   node->next = current->next;
-   current->next = node;
-   return;
-}
-void enqueueMin(struct Queue *q, struct queueNode *node)
-{
-   struct queueNode *current;
-   current = q->head;
-
-   if(!current)
-   {
-      q->head = node;
-      return;
-   }
-   if(current->priority > node->priority)
-   {
-      node->next = current;
-      q->head = node;
-      return;
-   }
-   
-   while(current->next && (current->next->priority < node->priority))
-      current = current->next;
-
-   node->next = current->next;
-   current->next = node;
-   return;
-}
-
-//
-// Stack routines
-//
-void pushStack(struct Stack *s, struct queueNode *node)
-{
-   node->next = s->top;
-   s->top = node;
-}
-
-struct queueNode* popStack(struct Stack *s)
-{
-   struct queueNode* node;
-   node = s->top;
-   s->top = s->top->next;
-   return(node);
-}
-
